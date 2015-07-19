@@ -104,7 +104,7 @@ and median by
 as.integer(median(calculatedStepsPerDay$x, na.rm=TRUE))
 ```
 
-The difference can we shown by creating an overlay on the histograms, where blue represents the new values. 
+The difference can be shown by creating an overlay on the histograms, where blue represents the new values. 
 ```{r}
 histogram <- ggplot(calculatedStepsPerDay, aes(x=x))
 histogram <- histogram + geom_histogram(binwidth=1000, colour="black", fill="blue", alpha="0.2")
@@ -121,9 +121,5 @@ activityData$dayType <- as.factor(ifelse(activityData$weekday %in% c("Saturday",
 activityPatternByDayType <- aggregate(activityData$steps, by=list(activityData$dayType, activityData$interval), FUN=mean, na.rm=TRUE)
   
 ggplot(activityPatternByDayType,aes(Group.2,x)) + facet_wrap( ~ Group.1, ncol=1) + geom_line(colour="blue") + xlab("Interval") + ylab("Number of steps")
-
-
-weekdays <- activityData[activityData$weekday %in% c("Monday", "Tuesday", "Wednesday", "Thursday","Friday"),]
-weekend <- activityData[activityData$weekday %in% c("Saturday", "Sunday"),]
 ```
 

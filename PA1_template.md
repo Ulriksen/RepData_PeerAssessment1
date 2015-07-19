@@ -146,7 +146,7 @@ as.integer(median(calculatedStepsPerDay$x, na.rm=TRUE))
 ## [1] 11016
 ```
 
-The difference can we shown by creating an overlay on the histograms, where blue represents the new values. 
+The difference can be shown by creating an overlay on the histograms, where blue represents the new values. 
 
 ```r
 histogram <- ggplot(calculatedStepsPerDay, aes(x=x))
@@ -159,7 +159,7 @@ histogram
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-Define weekdays and weekend
+Add a factor called dayType indicating weekday or weekend. Then create aggregate by dayType and interval which is used in the plot where dayType determines the facet_wrap. 
 
 ```r
 activityData$dayType <- as.factor(ifelse(activityData$weekday %in% c("Saturday", "Sunday"),"Weekend", "Weekday"))
@@ -171,18 +171,3 @@ ggplot(activityPatternByDayType,aes(Group.2,x)) + facet_wrap( ~ Group.1, ncol=1)
 
 ![](PA1_template_files/figure-html/unnamed-chunk-15-1.png) 
 
-```r
-weekdays <- activityData[activityData$weekday %in% c("Monday", "Tuesday", "Wednesday", "Thursday","Friday"),]
-weekend <- activityData[activityData$weekday %in% c("Saturday", "Sunday"),]
-```
-
-We can then do an owerlay plot on the count of steps per interval. 
-
-```r
-weekdayPattern <-aggregate(weekdays$steps , by = list(weekdays$interval), FUN = mean, na.rm=TRUE)  
-weekendPattern <- aggregate(weekend$steps , by = list(weekend$interval), FUN = mean, na.rm=TRUE)  
-
-ggplot() + geom_line(data=weekdayPattern, aes(x=Group.1, y=x, colour="Weekdays")) + geom_line(data=weekendPattern, aes(x=Group.1, y=x, colour="Weekend")) + xlab("Interval") + ggtitle("Weekdays vs weekends") + ylab("Number of steps") + scale_colour_manual("Legend",values=c("Weekend"="red", "Weekdays"="blue")) 
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
