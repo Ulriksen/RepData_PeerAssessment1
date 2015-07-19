@@ -1,13 +1,6 @@
 # Reproducible Research: Peer Assessment 1
 
 
-```r
-Sys.setlocale("LC_TIME","C")
-```
-
-```
-## [1] "C"
-```
 
 ## Loading and preprocessing the data
 This part will open the zipe file and read the data from the included activity.csv. The read will include NA values and transform all columns to appropriate data type.

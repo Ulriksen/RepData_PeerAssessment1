@@ -5,7 +5,8 @@ output:
     keep_md: true
 ---
 
-```{r}
+```{r eval=FALSE, echo=FALSE}
+#Used to control daynames in case user has a non-english locale
 Sys.setlocale("LC_TIME","C")
 ```
 
